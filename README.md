@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Cookie Stand Admin App
+
+This is a Cookie Stand Admin app built using Next.js and Tailwind CSS. It provides a simple user interface for creating and managing cookie stand locations. Here's a brief overview of the app and its components:
+
+## Components
+
+### Header
+
+The Header component displays the title of the app. It's located at the top of the page.
+
+### Footer
+
+The Footer component displays a copyright notice at the bottom of the page, indicating the year "Â©2022."
+
+### Main
+
+The Main component is the central part of the app where you can create new cookie stand locations. It allows you to input information such as location name, minimum customers per hour, maximum customers per hour, and average cookies per sale. You can create new cookie stands by clicking the "Create" button. The component also displays a report table, which is labeled as "Report table coming soon..." in the initial version of the app.
 
 ## Getting Started
 
-First, run the development server:
+To run this app locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```
+   git clone <repository-url>
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Change directory to the app folder:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```
+   cd cookie-stand-admin-app
+   ```
 
-## Learn More
+3. Install dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+   ```
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Run the app:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```
+   npm run dev
+   ```
 
-## Deploy on Vercel
+The app should now be running locally at `http://localhost:3000`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Usage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Open your web browser and navigate to `http://localhost:3000`.
+
+2. You will see the Cookie Stand Admin app with the Header, Main, and Footer components.
+
+3. Use the Main component to create new cookie stand locations by filling out the location name, minimum customers per hour, maximum customers per hour, and average cookies per sale. Click the "Create" button to add a new cookie stand.
+
+4. The app will display the details of the most recently added cookie stand in a JSON format below the form.
+
+## Additional Information
+
+- This app uses Next.js for server-side rendering and routing.
+- Tailwind CSS is used for styling, making it easy to create responsive and visually appealing UI components.
+- The app currently has basic functionality for creating cookie stand locations and displaying their details.
+message.txt
+3 KB
