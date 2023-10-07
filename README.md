@@ -1,65 +1,54 @@
-# Cookie Stand Admin App
+# Cookie Stand Admin App Documentation
 
-This is a Cookie Stand Admin app built using Next.js and Tailwind CSS. It provides a simple user interface for creating and managing cookie stand locations. Here's a brief overview of the app and its components:
+This README provides an overview of the components and structure of the Cookie Stand Admin app. The app allows users to create and manage information about cookie stands, displaying the data in a tabular format.
 
 ## Components
 
-### Header
 
-The Header component displays the title of the app. It's located at the top of the page.
+### `ReportTable` Component
 
-### Footer
+The `ReportTable` component is a crucial part of the app, responsible for presenting information about cookie stands in a structured table format. Here are some additional details:
 
-The Footer component displays a copyright notice at the bottom of the page, indicating the year "Â©2022."
+- **Dynamic Table Creation**: The component dynamically generates tables based on the provided `hours` and `reports` props. It calculates totals for each location and each hour of operation, as well as the grand total.
 
-### Main
+- **Responsive Styling**: The tables are styled with responsive design in mind. It uses CSS classes and color-coding to make the data visually appealing and easy to read.
 
-The Main component is the central part of the app where you can create new cookie stand locations. It allows you to input information such as location name, minimum customers per hour, maximum customers per hour, and average cookies per sale. You can create new cookie stands by clicking the "Create" button. The component also displays a report table, which is labeled as "Report table coming soon..." in the initial version of the app.
+- **Conditional Message**: When there are no cookie stands available (i.e., the `reports` array is empty), the component displays a user-friendly message stating, "No Cookie Stands Available."
 
-## Getting Started
+### `CreateForm` Component
 
-To run this app locally, follow these steps:
+The `CreateForm` component allows users to create new cookie stands by providing details such as location, minimum customers per hour, maximum customers per hour, and average cookies sold per sale. Here are more details:
 
-1. Clone the repository:
+- **Form Handling**: This component handles form input and validation. Users can enter numeric values for customer counts and average cookies sold per sale.
 
-   ```
-   git clone <repository-url>
-   ```
+- **State Management**: It uses React state hooks to manage the form inputs, making it easy to capture and submit user input.
 
-2. Change directory to the app folder:
+- **Data Submission**: When users submit the form, the component triggers the `onCreate` callback, passing the new cookie stand's details as an object.
 
-   ```
-   cd cookie-stand-admin-app
-   ```
+### `Footer` Component
 
-3. Install dependencies:
+The `Footer` component is a simple but informative part of the app:
 
-   ```
-   npm install
-   ```
+- **Location Count**: It calculates the number of locations based on the length of the `reports` array and displays this count in a footer. This provides users with an overview of how many cookie stands are currently being managed.
 
-4. Run the app:
+### `Header` Component
 
-   ```
-   npm run dev
-   ```
+The `Header` component provides the app's title and navigation:
 
-The app should now be running locally at `http://localhost:3000`.
+- **Title**: It displays the title "Cookie Stand Admin" to identify the purpose of the app.
 
-## Usage
+- **Navigation**: Users can quickly navigate back to the "Overview" page using the provided link.
 
-1. Open your web browser and navigate to `http://localhost:3000`.
+### `Main` Component
 
-2. You will see the Cookie Stand Admin app with the Header, Main, and Footer components.
+The `Main` component serves as the main content of the app:
 
-3. Use the Main component to create new cookie stand locations by filling out the location name, minimum customers per hour, maximum customers per hour, and average cookies per sale. Click the "Create" button to add a new cookie stand.
+- **State Management**: It manages the state for `cookieStands`, an array that holds information about all the cookie stands created by the user.
 
-4. The app will display the details of the most recently added cookie stand in a JSON format below the form.
+- **Creation Handling**: The component contains the `handleCreateCookieStand` function, which is used to add newly created cookie stands to the `cookieStands` array.
 
-## Additional Information
+- **Rendering Components**: It renders the `CreateForm`, `ReportTable`, and `Footer` components to create the user interface.
 
-- This app uses Next.js for server-side rendering and routing.
-- Tailwind CSS is used for styling, making it easy to create responsive and visually appealing UI components.
-- The app currently has basic functionality for creating cookie stand locations and displaying their details.
-message.txt
-3 KB
+### `Overview` Page
+
+The "Overview" page is a separate page that provides a link to return to the main page. It enhances the user experience by enabling easy navigation between pages.

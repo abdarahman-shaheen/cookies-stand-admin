@@ -9,7 +9,6 @@ function Index() {
     <div>
      <Headers/>
      <Main/>
-     <Footer/>
     </div>
   );
 }

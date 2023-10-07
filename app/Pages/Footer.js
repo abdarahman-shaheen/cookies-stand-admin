@@ -1,13 +1,14 @@
 import React from 'react';
 
 
-function Footer() {
+const Footer = (props) => {
   return (
-    <div style={{position:"absolute",bottom:0,width:"100%",textAlign:'center'}}>
-      <div style={{ backgroundColor: '#15b981' , padding: '10px', color:'black',fontSize:'25px'}} class="w-screen">
-      @2023    </div>
-    </div>
+    <div style={{position:"relative",bottom:0,marginTop:"15px",width:"100%",textAlign:'center'}}>
+    <div style={{ backgroundColor: '#15b981' , padding: '10px', color:'black',fontSize:'25px'}} class="w-screen">
+    <p>Total Locations Added: {props.locationCount}</p>
+   </div>
+  </div>
   );
-}
+};
 
 export default Footer;
