@@ -1,14 +1,24 @@
-import React from 'react';
-
-
-const Footer = (props) => {
-  return (
-    <div style={{position:"relative",bottom:0,marginTop:"15px",width:"100%",textAlign:'center'}}>
-    <div style={{ backgroundColor: '#15b981' , padding: '10px', color:'black',fontSize:'25px'}} class="w-screen">
-    <p>Total Locations Added: {props.locationCount}</p>
-   </div>
-  </div>
-  );
-};
-
-export default Footer;
+import React from 'react'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
+function Footer() {
+  const [reports, setReports] = useState([]);
+    useEffect(() => {
+      axios.get('https://salmon-cookies20231009150542.azurewebsites.net/CookieStand')
+        .then((response) => {
+          setReports(response.data);
+    
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }, []);
+    return (
+      <footer className=" inset-x-0  h-16 text-xl  bg-emerald-400">
+        <p className="text-white">{reports.length} Locations World Wide</p>
+      </footer>
+    );
+  }
+  
+  export default Footer;
