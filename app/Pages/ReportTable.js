@@ -1,75 +1,78 @@
-// ReportTable.js
-import React from 'react';
+import { useState, useEffect } from 'react'
+import React from 'react'
+import axios from 'axios'
+const ReportTable = ({ hours,onDelete }) => {
 
-const ReportTable = ({ hours, reports }) => {
+
+  const [reports, setReports] = useState([]);
+
+  // Fetch data from the local API
+  const fetchData = () => {
+    axios
+      .get('https://salmon-cookies20231009150542.azurewebsites.net/CookieStand')
+      .then((response) => {
+        setReports(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  };
+
+  useEffect(() => {
+    // This effect will run whenever onDelete is called in the parent component
+    fetchData();
+
+  }, [reports]);
+
   if (reports.length === 0) {
-    return <h2>No Cookie Stands Available</h2>;
+    return <h2 className=" font-bold  flex content-box flex-col justify-items-center ml-64 mt-6">No Cookie Stands Available</h2>;
   }
+  const totalsPerStand = reports.map((report) =>
+   report.hourss.reduce((acc, sales) => acc + sales, 0)
+ );  
+ const totalsPerHour = hours.map((hour, index) =>
+ reports.reduce((acc, report) => acc + report.hourss[index], 0)
+ );
+ const totalAllStands = totalsPerStand.reduce((acc, total) => acc + total, 0);
+   const grandTotal = totalsPerHour.reduce((acc, total) => acc + total, 0);
 
-  const getTotal = (hour) => {
-    return reports.reduce((sum, stand) => sum + stand.hourly_sales[hour], 0);
-  };
 
-  const getDailyTotal = (stand) => {
-    return stand.hourly_sales.reduce((dailySum, sales) => dailySum + sales, 0);
-  };
-
-  const getGrandTotal = () => {
-    return reports.reduce((sum, stand) => sum + getDailyTotal(stand), 0);
-  };
-
-  return (
-    <div style={{ textAlign: 'center' }}>
-      <table style={{ margin: 'auto', borderCollapse: 'collapse', width: '80%', marginTop: '20px' }}>
-        <thead>
-          <tr>
-            <th style={tableHeaderStyle}>Location</th>
-            {hours.map((hour, index) => (
-              <th key={index} style={tableHeaderStyle}>{hour}</th>
-            ))}
-            <th style={tableHeaderStyle}>Daily Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reports.map((stand, standIndex) => (
-            <tr key={standIndex}>
-              <td style={tableCellStyle}>{stand.location}</td>
-              {stand.hourly_sales.map((sales, hourIndex) => (
-                <td key={hourIndex} style={tableCellStyle}>{sales}</td>
-              ))}
-              <td style={tableCellStyle}>{getDailyTotal(stand)}</td>
-            </tr>
+return (
+  <div className="w-4/6 rounded-lg  bg-emerald-300 flex content-box flex-col justify-items-center ml-64 mt-6">
+    <table className=" rounded-lg">
+      <thead className=" bg-emerald-600 border-2 border-black">
+        <tr className="border-2 border-black">
+          <th>Location</th>
+          {hours.map((hour, index) => (
+            <th key={index} className="border-2 border-black">{hour}</th>
           ))}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td style={tableFooterStyle}>Total</td>
-            {hours.map((hour, index) => (
-              <td key={index} style={tableFooterStyle}>{getTotal(index)}</td>
-            ))}
-            <td style={tableFooterStyle}>{getGrandTotal()}</td>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody >
+        {reports.map((report, index) => (
+          <tr key={index} className={index % 2 ? "bg-emerald-400" : "bg-emerald-300"}>
+            <td className="border-2 border-black">{report.location} <button style={{backgroundColor:"red"}} onClick={() => onDelete(report.id)}>Delete</button></td>
+        {report.hourss.map((sales, index) => (
+              <td key={index} className="border-2 border-black">{sales} </td>
+            ))}  
+           
+             <td className="border-2 border-black">{totalsPerStand[index]}</td> 
           </tr>
-        </tfoot>
-      </table>
-    </div>
-  );
-};
-
-const tableHeaderStyle = {
-  background: '#15b981',
-  color: 'white',
-  padding: '10px',
-};
-
-const tableCellStyle = {
-  border: '1px solid #ddd',
-  padding: '8px',
-};
-
-const tableFooterStyle = {
-  background: '#15b981',
-  color: 'white',
-  padding: '10px',
+        ))}
+        <tr className="bg-emerald-600 border-2 border-black">
+          <td className="border-2 border-black">Total</td>
+          {totalsPerHour.map((total, index) => (
+            <td key={index} className="border-2 border-black">{total}</td>
+          ))}
+          <td className="border-2 border-black">{totalAllStands}</td> 
+        </tr>
+      </tbody>
+    </table>
+  
+  </div>
+);
 };
 
 export default ReportTable;
